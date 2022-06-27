@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { useForm, yupResolver } from '@mantine/form';
-import { NumberInput, TextInput, Button, Box, Group } from '@mantine/core';
+import { NumberInput, TextInput, Button, Box, Group, Modal } from '@mantine/core';
+import { useState } from 'react';
 
 const schema = Yup.object().shape({
   number: Yup.string()
@@ -25,7 +26,15 @@ const schema = Yup.object().shape({
     .required('Amount is required'),
 });
 
+const initialModalState = {
+  opened: false,
+  title: '',
+  id: '',
+  amount: 0,
+}
+
 export default function CardForm() {
+  const [modal, setModal] = useState(initialModalState);
   const form = useForm({
     schema: yupResolver(schema),
     initialValues: {
@@ -36,7 +45,6 @@ export default function CardForm() {
     },
   });
   const handleSubmit = async values => {
-    console.log('🚀 ~ formData', values);
     const res = await fetch('/api/cards', {
       body: JSON.stringify(values),
       headers: {
@@ -45,8 +53,14 @@ export default function CardForm() {
       method: 'POST',
     });
 
-    const result = await res.json();
-    console.log('🚀 ~  result', result);
+    const { id, amount} = await res.json();
+    setModal({
+      opened: true,
+      title: `The data was successfully stored in redis cloud!`,
+      id,
+      amount,
+    });
+    form.reset();
   };
 
   return (
@@ -63,12 +77,7 @@ export default function CardForm() {
         placeholder='01/22'
         {...form.getInputProps('expiration_date')}
       />
-      <TextInput
-        label='CVV'
-        name='cvv'
-        placeholder='777'
-        {...form.getInputProps('cvv')}
-      />
+      <TextInput label='CVV' name='cvv' placeholder='777' {...form.getInputProps('cvv')} />
       <NumberInput
         label='Amount'
         name='amount'
@@ -78,6 +87,17 @@ export default function CardForm() {
       <Group position='right' mt='xl'>
         <Button type='submit'>Submit</Button>
       </Group>
+
+      <Modal
+        opened={modal.opened}
+        onClose={() => setModal(initialModalState)}
+        title="Grats!"
+      >
+        <p>{modal.title}</p>
+        <p>ID: {modal.id}</p>
+        <p>Amount: {modal.amount}</p>
+
+      </Modal>
     </form>
   );
 }

@@ -3,8 +3,7 @@
 import { createCard } from "../../lib/redis"
 
 export default async function handler(req, res) {
-	const id = await createCard(req.body)
-  console.log('🚀 ~ id', id)
+	const result = await createCard(req.body)
 
-  res.status(200).json({ id })
+  res.status(200).json(result)
 }
