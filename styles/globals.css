@@ -14,3 +14,41 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.form {
+  margin: 0 auto;
+  width: 600px;
+  padding-bottom: 32px;
+}
+
+.input {
+  box-shadow: 0px 10px 13px -12px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.submit:before {
+  transition: .3s ease-in-out;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: aquamarine;
+  transform: translate(-100%, 0)
+}
+.submit {
+  position: relative;
+  overflow: hidden;
+}
+.submit span {
+  z-index: 1;
+}
+.submit:hover {
+  color: black;
+}
+.submit:hover.submit:before {
+  transform: translate(0%, 0);
+}

@@ -64,7 +64,7 @@ export default function CardForm() {
   };
 
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form className='form' onSubmit={form.onSubmit(handleSubmit)}>
       <TextInput
         label='Card Number'
         name='number'
@@ -85,7 +85,7 @@ export default function CardForm() {
         {...form.getInputProps('amount')}
       />
       <Group position='right' mt='xl'>
-        <Button type='submit'>Submit</Button>
+        <Button className='submit' type='submit'>Submit</Button>
       </Group>
 
       <Modal
