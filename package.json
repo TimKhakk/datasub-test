@@ -9,10 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^4.2.11",
+    "@mantine/form": "^4.2.11",
+    "@mantine/hooks": "^4.2.11",
+    "@mantine/next": "^4.2.11",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "redis-om": "^0.3.5"
+    "redis-om": "^0.3.5",
+    "tabler-icons-react": "^1.51.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "eslint": "8.18.0",
