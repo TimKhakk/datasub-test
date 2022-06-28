@@ -74,7 +74,7 @@ export default function CardForm() {
       <TextInput
         label='Expiration date'
         name='expiration_date'
-        placeholder='01/22'
+        placeholder='01/2022'
         {...form.getInputProps('expiration_date')}
       />
       <TextInput label='CVV' name='cvv' placeholder='777' {...form.getInputProps('cvv')} />
